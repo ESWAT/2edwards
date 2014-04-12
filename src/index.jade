@@ -1,13 +1,37 @@
 doctype html
 html(lang='en')
   head
-  meta(charset="utf-8")
-  title= title
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  meta(name="author", content="#{author}")
-  meta(name="description", content="#{description}")
-  link(rel="stylesheet", href="css/app.css")
-  script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
-  script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    meta(charset="utf-8")
+    title= title
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="author", content="#{author}")
+    meta(name="description", content="#{description}")
+    link(rel="stylesheet", href="css/app.css")
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+
   body
-    h1 Hello, world!
+    .app-container.container-fluid
+      .app-row.row
+        .app-sidebar.col-md-3
+          .panel.panel-default
+            .panel-heading Hello world
+            .panel-body
+              p wat
+        .app-map.col-md-9
+
+  script(src='//oss.maxcdn.com/d3js/3.4.3/d3.min.js')
+  script.
+    var sampleSVG = d3.select(".app-map")
+        .append("svg")
+        .attr("width", 100)
+        .attr("height", 100);
+
+    sampleSVG.append("circle")
+        .style("stroke", "gray")
+        .style("fill", "white")
+        .attr("r", 40)
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+        .on("mouseout", function(){d3.select(this).style("fill", "white");});
