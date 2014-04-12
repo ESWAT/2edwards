@@ -1,7 +1,7 @@
 {
-  "name": "CEKTOP",
+  "name": "2edwards",
   "version": "0.1.2",
-  "description": "A static site generator for GitHub Pages, powered by Grunt & Node.js.",
+  "description": "A visualization thing for Ottawa",
   "main": "Gruntfile.js",
   "private": true,
   "scripts": {
