@@ -1,0 +1,19 @@
+.form-group
+  .input-group
+    input.form-control(placeholder="Find a neighborhood")
+    .input-group-btn()
+      button.btn.btn-default Search
+.form-group
+  .panel-group#accordion
+    .panel.panel-default
+      .panel-heading
+        h4.panel-title
+          a(data-toggle="collapse", data-parent="#accordion", href="#collapseOne") Mother Tongue
+      #collapseOne.panel-collapse.collapse
+        .panel-body test1
+    .panel.panel-default
+      .panel-heading
+        h4.panel-title
+          a(data-toggle="collapse", data-parent="#accordion", href="#collapseTwo") Ethnic Origin
+      #collapseTwo.panel-collapse.collapse
+        .panel-body test2

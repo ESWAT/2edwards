@@ -3,9 +3,12 @@
 // Auto-size app elements to max height
 // so they fill the viewport
 
-html, body, .app-container, .app-row, .app-sidebar, .app-map, .panel
+html, body, .app-container, .app-row, .app-sidebar, .app-map
   height: 100%
 
 .app-sidebar
-  background: $gray-lighter
+  background: $bg-color
   padding: 20px
+
+  *:first-child
+    margin-top: 0
