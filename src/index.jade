@@ -1,17 +1,13 @@
 doctype html
-html(lang="en")
+html(lang='en')
   head
-    meta(charset="utf-8")
-    title= title
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(name="author", content="#{author}")
-    meta(name="description", content="#{description}")
-    link(rel="stylesheet", href="css/app.css")
+  meta(charset="utf-8")
+  title= title
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  meta(name="author", content="#{author}")
+  meta(name="description", content="#{description}")
+  link(rel="stylesheet", href="css/app.css")
+  script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+  script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
   body
-    .container
-      h1= title
-      p= description
-      a(href="https://github.com/ESWAT/cektop/archive/v#{version}.zip") Download
-      a(href="https://github.com/ESWAT/CEKTOP/") View Source
-
-    script(src="js/app.js")
+    h1 Hello, world!
