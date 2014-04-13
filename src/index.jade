@@ -12,12 +12,15 @@ html(lang='en')
     script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
 
   body
+    .logo
+      a(href='http://www.hireimmigrantsottawa.ca/')
+        img(src='assets/ons_square_reasonably_small.jpg', width='64', height='64')
     .app-container.container-fluid
       .app-row.row
-        .app-sidebar.col-md-3
+        .app-sidebar.col-md-4
           include sidebar
           include map-controls
-        .app-map.col-md-9
+        .app-map.col-md-8
 
 
   script(src='//oss.maxcdn.com/d3js/3.4.3/d3.min.js')
@@ -86,7 +89,7 @@ html(lang='en')
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = .8 / Math.max(dx / width, dy / height),
+          scale = .4 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
       g.transition()

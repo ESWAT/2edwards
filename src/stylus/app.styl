@@ -40,12 +40,12 @@ html, body, .app-container, .app-row, .app-sidebar, .app-map
   pointer-events: all;
 
 .feature
-  stroke: gray;
-  fill: gray;
+  stroke: $gray-light;
+  fill: $gray-light;
   cursor: pointer;
 
 .feature.active
-  fill: green;
+  fill: $brand-primary;
 
 .mesh
   fill: none;
@@ -57,4 +57,10 @@ html, body, .app-container, .app-row, .app-sidebar, .app-map
   margin-top: 20px
 
 .badge
-  background: #407c00
+  background: $brand-primary
+
+.logo
+  position: absolute
+  bottom: 20px
+  right: 20px
+  z-index: $zindex-modal
