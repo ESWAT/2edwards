@@ -1,5 +1,99 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>2edwards</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Philip Karpiak &lt;operations@eswat.ca&gt; (http://eswat.ca/)"><meta name="description" content="A visualization thing for Ottawa"><link rel="stylesheet" href="css/app.css"><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700"><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script></head><body><div class="app-container container-fluid"><div class="app-row row"><div class="app-sidebar col-md-3"><h3>Site Name</h3>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>2edwards</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Philip Karpiak &lt;operations@eswat.ca&gt; (http://eswat.ca/)"><meta name="description" content="A visualization thing for Ottawa"><link rel="stylesheet" href="css/app.css"><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,700"><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script></head><body><div class="app-container container-fluid"><div class="app-row row"><div class="app-sidebar col-md-3"><h3>Site Name</h3>
 
 <p>This first paragraph should have text explaining the site, what it can be used for and why it’s important.</p>
 
-<p>Below this text we can add elements used to manipulate the map/data on the right</p><!-- include map-controls--></div><div class="app-map col-md-9"></div></div></div></body><script src="//oss.maxcdn.com/d3js/3.4.3/d3.min.js"></script><script src="//oss.maxcdn.com/jquery/2.1.0/jquery.min.js"></script><script src="js/transition.js"></script><script src="js/collapse.js"></script><script src="js/app.js"></script></html>
+<p>Below this text we can add elements used to manipulate the map/data on the right</p><h4 id="language-heading"></h4><div style="display: none" class="info-panel panel panel-default"><div class="panel-heading"><span>Language Breakdown</span></div><div class="panel-body"><ul class="list-group"><li class="list-group-item"><span>North American Aboriginal </span><strong class="badge pull-right"><span id="origin-one"></span>%</strong></li><li class="list-group-item"><span> Other North American </span><strong class="badge pull-right"><span id="origin-two"></span>%</strong></li><li class="list-group-item"><span> European ethnicity </span><strong class="badge pull-right"><span id="origin-three"></span>%</strong></li><li class="list-group-item"><span> Caribbean </span><strong class="badge pull-right"><span id="origin-four"></span>%</strong></li><li class="list-group-item"><span> Latin, Central and South American </span><strong class="badge pull-right"><span id="origin-five"></span>%</strong></li><li class="list-group-item"><span> African </span><strong class="badge pull-right"><span id="origin-six"></span>%</strong></li><li class="list-group-item"><span> Asian </span><strong class="badge pull-right"><span id="origin-seven"></span>%</strong></li><li class="list-group-item"><span>Ethnic Oceania </span><strong class="badge pull-right"><span id="origin-eight"></span>%</strong></li></ul></div></div></div><div class="app-map col-md-9"></div></div></div></body><script src="//oss.maxcdn.com/d3js/3.4.3/d3.min.js"></script><script src="http://d3js.org/topojson.v1.min.js"></script><script src="//oss.maxcdn.com/jquery/2.1.0/jquery.min.js"></script><script src="js/transition.js"></script><script src="js/collapse.js"></script><script>var width = $('.app-map').outerWidth(),
+    height = $('.app-map').outerHeight(),
+    active = d3.select(null);
+    
+// var projection = d3.geo.albers()
+//     // .center([-75.702, 45.423])
+//     .scale(960)
+//     .translate([width / 2, height / 2]);
+
+var projection = d3.geo.albers()
+    // .center([-75.702, 45.423])
+    .parallels([45, 46])
+    // .scale(1200 * 5)
+    .translate([width / 2, height / 2]);
+    
+var path = d3.geo.path()
+    .projection(projection);
+    
+var svg = d3.select(".app-map").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+svg.append("rect")
+    .attr("class", "background")
+    .attr("width", width)
+    .attr("height", height)
+    .on("click", reset);
+    
+var g = svg.append("g")
+    .style("stroke-width", "1.5px");
+    
+d3.json("assets/ons.topo.json", function(error, map) {
+
+  g.selectAll()
+    .data(topojson.feature(map, map.objects.neighbourhoods).features)
+    .enter().append("path")
+    .attr("d", path)
+    .attr("class", "feature")
+    .on("click", clicked);
+    
+  g.append("path")
+    .datum(topojson.mesh(map, map.objects.neighbourhoods, function(a, b) { return a !== b; }))
+    .attr("class", "mesh")
+    .attr("d", path);
+    
+});
+
+
+function clicked(d) {
+  if (active.node() === this) return reset();
+  active.classed("active", false);
+  active = d3.select(this).classed("active", true);
+  
+  console.log(d.properties.Neighborhood)
+  var bounds = path.bounds(d),
+      dx = bounds[1][0] - bounds[0][0],
+      dy = bounds[1][1] - bounds[0][1],
+      x = (bounds[0][0] + bounds[1][0]) / 2,
+      y = (bounds[0][1] + bounds[1][1]) / 2,
+      scale = .8 / Math.max(dx / width, dy / height),
+      translate = [width / 2 - scale * x, height / 2 - scale * y];
+      
+  g.transition()
+      .duration(750)
+      .style("stroke-width", 1.5 / scale + "px")
+      .attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+      // console.log(translate)
+      // console.log(scale)
+      
+  $('#language-heading').text(d.properties.Neighborhood);
+  $('#origin-one').text(d.properties.ethnic_origin_north_american_aboriginal);
+  $('#origin-two').text(d.properties.ethnic_origin_other_north_american);
+  $('#origin-three').text(d.properties.ethnic_origin_european);
+  $('#origin-four').text(d.properties.ethnic_origin_carribean);
+  $('#origin-five').text(d.properties.ethnic_origin_latin);
+  $('#origin-six').text(d.properties.ethnic_origin_african);
+  $('#origin-seven').text(d.properties.ethnic_origin_asian);
+  $('#origin-eight').text(d.properties.ethnic_origin_oceania);
+  
+  $('.info-panel').show();
+}
+
+function reset() {
+  active.classed("active", false);
+  active = d3.select(null);
+  
+  g.transition()
+      .duration(750)
+      .style("stroke-width", "1.5px")
+      .attr("transform", "");
+}
+
+$(document).ready(function () {
+  d3.select()
+});</script></html>
