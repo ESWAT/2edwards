@@ -41,9 +41,8 @@ html(lang='en')
 
     var projection = d3.geo.albers()
         // .center([-75.702, 45.423])
-        .parallels([45, 46])
-        // .scale(1200 * 5)
-        .translate([width / 2, height / 2]);
+        .scale(20000)
+        .translate([-4700, 3200]);
 
     var path = d3.geo.path()
         .projection(projection);
