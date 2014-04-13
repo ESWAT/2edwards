@@ -5,15 +5,29 @@
       button.btn.btn-default Search
 .form-group
   .panel-group#accordion
-    .panel.panel-default
+    .filter-panel.panel.panel-default
       .panel-heading
         h4.panel-title
           a(data-toggle="collapse", data-parent="#accordion", href="#collapseOne") Mother Tongue
       #collapseOne.panel-collapse.collapse
-        .panel-body test1
-    .panel.panel-default
+        .panel-body
+          ul.list-group
+            li.list-group-item English
+            li.list-group-item French
+            li.list-group-item English and French
+            li.list-group-item Neither English nor French
+    .filter-panel.panel.panel-default
       .panel-heading
         h4.panel-title
           a(data-toggle="collapse", data-parent="#accordion", href="#collapseTwo") Ethnic Origin
       #collapseTwo.panel-collapse.collapse
-        .panel-body test2
+        .panel-body
+          ul.list-group
+            li.list-group-item North American Aboriginal
+            li.list-group-item Other North American
+            li.list-group-item European ethnicity
+            li.list-group-item Caribbean
+            li.list-group-item Latin, Central and South American
+            li.list-group-item African
+            li.list-group-item Asian
+            li.list-group-item Oceania
