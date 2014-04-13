@@ -17,7 +17,7 @@ html, body, .app-container, .app-row, .app-sidebar, .app-map
   *:first-child
     margin-top: 0
 
-.filter-panel
+.info-panel
   .panel-body
     padding: 0
 
@@ -31,3 +31,30 @@ html, body, .app-container, .app-row, .app-sidebar, .app-map
 
   .list-group-item:first-child
     border-top: 0
+
+  .badge
+    font-family: $font-family-sans-serif !important
+
+.background
+  fill: white;
+  pointer-events: all;
+
+.feature
+  stroke: gray;
+  fill: gray;
+  cursor: pointer;
+
+.feature.active
+  fill: green;
+
+.mesh
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+#language-heading
+  margin-top: 20px
+
+.badge
+  background: #407c00

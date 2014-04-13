@@ -177,7 +177,6 @@ module.exports = (grunt) ->
 
   # Start server in development mode
   grunt.registerTask "default", [
-    "coffeelint"
     "clean"
     "concurrent:dev"
     "connect:dev"

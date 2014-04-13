@@ -1,33 +1,47 @@
-.form-group
-  .input-group
-    input.form-control(placeholder="Find a neighborhood")
-    .input-group-btn()
-      button.btn.btn-default Search
-.form-group
-  .panel-group
-    .filter-panel.panel.panel-default
-      .panel-heading
-        h4.panel-title
-          a(data-toggle="collapse", data-parent="#accordion", href="#collapseOne") Language
-      #collapseOne.panel-collapse.collapse
-        .panel-body
-          ul.list-group
-            li.list-group-item English
-            li.list-group-item French
-            li.list-group-item English and French
-            li.list-group-item Neither English nor French
-    .filter-panel.panel.panel-default
-      .panel-heading
-        h4.panel-title
-          a(data-toggle="collapse", data-parent="#accordion", href="#collapseTwo") Ethnic Origin
-      #collapseTwo.panel-collapse.collapse
-        .panel-body
-          ul.list-group
-            li.list-group-item North American Aboriginal
-            li.list-group-item Other North American
-            li.list-group-item European ethnicity
-            li.list-group-item Caribbean
-            li.list-group-item Latin, Central and South American
-            li.list-group-item African
-            li.list-group-item Asian
-            li.list-group-item Oceania
+h4#language-heading
+
+.info-panel.panel.panel-default(style='display: none')
+  .panel-heading
+    span= "Language Breakdown"
+  .panel-body
+    ul.list-group
+      li.list-group-item
+        span= "North American Aboriginal "
+        strong.badge.pull-right
+          span#origin-one
+          | %
+      li.list-group-item
+        span= " Other North American "
+        strong.badge.pull-right
+          span#origin-two
+          | %
+      li.list-group-item
+        span= " European ethnicity "
+        strong.badge.pull-right
+          span#origin-three
+          | %
+      li.list-group-item
+        span= " Caribbean "
+        strong.badge.pull-right
+          span#origin-four
+          | %
+      li.list-group-item
+        span= " Latin, Central and South American "
+        strong.badge.pull-right
+          span#origin-five
+          | %
+      li.list-group-item
+        span= " African "
+        strong.badge.pull-right
+          span#origin-six
+          | %
+      li.list-group-item
+        span= " Asian "
+        strong.badge.pull-right
+          span#origin-seven
+          | %
+      li.list-group-item
+        span= "Ethnic Oceania "
+        strong.badge.pull-right
+          span#origin-eight
+          | %
